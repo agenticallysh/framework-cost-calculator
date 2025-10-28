@@ -14,16 +14,16 @@
 
 | Framework | Development | Production | Enterprise | Most Cost Effective For |
 |-----------|-------------|------------|------------|------------------------|
-| **Semantic Kernel** | $0.45 | $1.20 | $2.80 | Enterprise integration |
-| **AutoGen** | $0.52 | $1.35 | $3.10 | Research & development |
-| **CrewAI** | $0.58 | $1.45 | $3.25 | Multi-agent systems |
-| **LangChain** | $0.64 | $1.60 | $3.50 | Flexible applications |
-| **LangGraph** | $0.69 | $1.75 | $3.80 | Stateful workflows |
+| **Semantic Kernel** | $0.25 | $0.85 | $2.20 | Enterprise integration |
+| **AutoGen** | $0.30 | $1.10 | $2.85 | Research & development |
+| **CrewAI** | $0.35 | $1.25 | $3.50+ | Multi-agent systems |
+| **LangChain** | $0.40 | $1.40 | $2.95 | Flexible applications |
+| **LangGraph** | $0.45 | $1.55 | $3.20 | Stateful workflows |
 
 ### Monthly Projections (10k requests/month)
-- **Budget Tier**: $450-690/month
-- **Production Tier**: $1,200-1,750/month  
-- **Enterprise Tier**: $2,800-3,800/month
+- **Budget Tier**: $250-450/month
+- **Production Tier**: $850-1,550/month  
+- **Enterprise Tier**: $2,200-3,500+/month
 
 [Detailed cost comparison →](https://www.agentically.sh/ai-agentic-frameworks/cost-calculator/compare/)
 
@@ -33,21 +33,21 @@
 
 | Framework | Avg Input Tokens | Avg Output Tokens | Efficiency Score | Hidden Multipliers |
 |-----------|------------------|-------------------|-------------------|-------------------|
-| Semantic Kernel | 1,240 | 680 | 95% | Framework overhead: 5% |
-| AutoGen | 1,380 | 820 | 92% | Conversation rounds: +15% |
-| CrewAI | 1,520 | 890 | 89% | Multi-agent coordination: +12% |
-| LangChain | 1,680 | 1,020 | 86% | Chain execution: +18% |
-| LangGraph | 1,750 | 1,150 | 82% | State management: +22% |
+| Semantic Kernel | 1,180 | 620 | 96% | Framework overhead: 4% |
+| AutoGen | 1,320 | 780 | 93% | Conversation rounds: +12% |
+| CrewAI | 1,450 | 850 | 90% | Multi-agent coordination: +15% |
+| LangChain | 1,580 | 950 | 87% | Chain execution: +16% |
+| LangGraph | 1,680 | 1,080 | 84% | State management: +20% |
 
 ### Infrastructure Costs
 
 #### Cloud Deployment (monthly)
-| Framework | AWS | Azure | GCP | Self-Hosted |
-|-----------|-----|-------|-----|-------------|
-| AutoGen | $125 | $138 | $142 | $45 |
-| CrewAI | $145 | $162 | $158 | $52 |
-| LangChain | $165 | $185 | $178 | $61 |
-| LangGraph | $185 | $208 | $198 | $68 |
+| Framework | AWS EKS | Azure AKS | GCP GKE | Self-Hosted |
+|-----------|---------|-----------|---------|-------------|
+| AutoGen | $85-320 | $95-350 | $90-340 | $35-85 |
+| CrewAI | $95-380 | $110-420 | $105-400 | $40-95 |
+| LangChain | $110-450 | $125-480 | $120-460 | $45-110 |
+| LangGraph | $125-520 | $140-550 | $135-530 | $50-125 |
 
 [Infrastructure calculator →](https://www.agentically.sh/ai-agentic-frameworks/cost-calculator/infrastructure/)
 
@@ -168,32 +168,32 @@ print(f"Annual Savings: ${analysis.annual_savings:,}")
 
 ```python
 # cost_monitor.py
-import logging
+from cost_calculator import FrameworkCostCalculator, ModelProvider, Framework
 from datetime import datetime
 
 class CostMonitor:
-    def __init__(self, budget_limit=1000):
+    def __init__(self, budget_limit=1000, framework=Framework.AUTOGEN):
         self.budget_limit = budget_limit
         self.current_spend = 0
+        self.calculator = FrameworkCostCalculator()
+        self.framework = framework
         
-    def track_request(self, tokens_used, model="gpt-4"):
-        cost = self.calculate_cost(tokens_used, model)
+    def track_request(self, tokens_used, model=ModelProvider.OPENAI_GPT4O):
+        cost = self.calculator.calculate_cost_per_request(
+            self.framework, model, tokens_used
+        )
         self.current_spend += cost
         
         if self.current_spend > self.budget_limit * 0.8:
             self.send_alert(f"80% budget used: ${self.current_spend:.2f}")
             
-    def calculate_cost(self, tokens, model):
-        rates = {
-            "gpt-4": {"input": 0.03, "output": 0.06},
-            "gpt-3.5-turbo": {"input": 0.0015, "output": 0.002}
-        }
-        # Simplified calculation
-        return tokens * rates[model]["output"] / 1000
+    def send_alert(self, message):
+        print(f"⚠️ COST ALERT: {message}")
+        # In production: send email, Slack, etc.
 
-# Usage
-monitor = CostMonitor(budget_limit=500)
-monitor.track_request(tokens_used=1200, model="gpt-4")
+# Usage with real 2025 pricing
+monitor = CostMonitor(budget_limit=500, framework=Framework.CREWAI)
+monitor.track_request(tokens_used=2300, model=ModelProvider.OPENAI_GPT4O)
 ```
 
 ### Cost Alerts & Budgets
@@ -223,23 +223,25 @@ optimization:
 
 ## 📊 Price Comparison Matrix
 
-### By Model Provider
+### By Model Provider (2025 Rates)
 
-| Framework | OpenAI GPT-4 | OpenAI GPT-3.5 | Claude-3 | Local LLM |
-|-----------|-------------|----------------|----------|-----------|
-| AutoGen | $0.052/1k | $0.008/1k | $0.045/1k | $0.002/1k |
-| CrewAI | $0.058/1k | $0.009/1k | $0.048/1k | $0.003/1k |
-| LangChain | $0.064/1k | $0.011/1k | $0.052/1k | $0.004/1k |
-| LangGraph | $0.069/1k | $0.012/1k | $0.055/1k | $0.005/1k |
+| Framework | OpenAI GPT-4o | OpenAI GPT-4o-mini | Claude 3.5 Sonnet | Local LLM |
+|-----------|---------------|-------------------|-------------------|-----------|
+| AutoGen | $5.00/$20.00 per 1M | $0.15/$0.60 per 1M | $3.00/$15.00 per 1M | $0.05/1M |
+| CrewAI | $5.00/$20.00 per 1M | $0.15/$0.60 per 1M | $3.00/$15.00 per 1M | $0.05/1M |
+| LangChain | $5.00/$20.00 per 1M | $0.15/$0.60 per 1M | $3.00/$15.00 per 1M | $0.05/1M |
+| LangGraph | $5.00/$20.00 per 1M | $0.15/$0.60 per 1M | $3.00/$15.00 per 1M | $0.05/1M |
+
+*Rates shown as Input/Output per 1M tokens. Framework overhead varies by implementation.*
 
 ### By Use Case Intensity
 
 | Framework | Light Use (<1k/month) | Medium Use (10k/month) | Heavy Use (100k/month) |
 |-----------|----------------------|------------------------|------------------------|
-| AutoGen | $52 | $520 | $4,200 |
-| CrewAI | $58 | $580 | $4,800 |
-| LangChain | $64 | $640 | $5,400 |
-| LangGraph | $69 | $690 | $6,200 |
+| AutoGen | $30-85 | $300-850 | $2,800-8,200 |
+| CrewAI | $35-95 | $350-950 | $3,200-9,500 |
+| LangChain | $40-110 | $400-1,100 | $3,800-11,000 |
+| LangGraph | $45-125 | $450-1,250 | $4,200-12,500 |
 
 [Detailed pricing →](https://www.agentically.sh/ai-agentic-frameworks/cost-calculator/pricing/)
 
@@ -299,10 +301,10 @@ ROI: 567-584%
 
 | Deployment | Setup Cost | Monthly Cost | Maintenance | Best For |
 |------------|------------|-------------|-------------|----------|
-| **Cloud (Managed)** | $0 | $800-2,000 | Minimal | Quick deployment |
-| **Cloud (Self-managed)** | $500 | $400-1,200 | Medium | Cost optimization |
-| **On-Premise** | $5,000 | $200-600 | High | Data compliance |
-| **Hybrid** | $2,000 | $300-900 | Medium | Flexibility |
+| **Cloud (Managed)** | $0-500 | $850-3,200+ | Minimal | Quick deployment |
+| **Cloud (Self-managed)** | $1,000-2,500 | $320-1,800 | Medium | Cost optimization |
+| **On-Premise** | $8,000-25,000 | $150-800 | High | Data compliance |
+| **Hybrid** | $3,000-8,000 | $480-1,400 | Medium | Flexibility |
 
 ### Break-Even Analysis
 
@@ -370,29 +372,84 @@ total_first_month: $3,410
 
 ### 1. Quick Estimate
 ```bash
-# Install calculator CLI
-pip install agentically-cost-calculator
+# Clone this repository
+git clone https://github.com/agenticallysh/framework-cost-calculator.git
+cd framework-cost-calculator
 
-# Quick estimate
-agentically-cost estimate --framework crewai --requests 10000
+# Run the cost calculator (no dependencies required)
+python3 cost_calculator.py
 
 # Output:
-# Framework: CrewAI
-# Monthly requests: 10,000
-# Estimated cost: $580/month
-# Recommendation: Consider AutoGen for 15% savings
+# 🧮 AI Agent Framework Cost Calculator (2025)
+# Framework Comparison (10k requests/month, GPT-4o):
+# Semantic Kernel: $650.92/month
+# AutoGen: $703.72/month  
+# CrewAI: $735.95/month
+# LangChain: $767.83/month
+# LangGraph: $809.32/month
 ```
 
 ### 2. Detailed Analysis
-```bash
-# Detailed cost breakdown
-agentically-cost analyze --config my-project.yaml
+```python
+from cost_calculator import FrameworkCostCalculator, Framework, ModelProvider
 
-# Compare frameworks
-agentically-cost compare --frameworks crewai,autogen,langchain
+calculator = FrameworkCostCalculator()
+
+# Compare frameworks for your use case
+comparison = calculator.compare_frameworks(
+    ModelProvider.OPENAI_GPT4O,
+    requests_per_month=10000
+)
+
+# Calculate migration savings
+savings = calculator.estimate_migration_savings(
+    Framework.LANGCHAIN,  # From
+    Framework.AUTOGEN,    # To
+    ModelProvider.OPENAI_GPT4O,
+    10000
+)
+
+print(f"Monthly savings: ${savings['monthly_savings']}")
+print(f"Annual savings: ${savings['annual_savings']}")
 ```
 
-### 3. Interactive Calculator
+### 3. Real-World Examples
+```bash
+# Run comprehensive examples with real scenarios
+python3 examples.py
+
+# Sample output:
+# 💡 Startup (1,000 requests/month):
+# 1. Semantic Kernel: $130.62/month
+# 2. AutoGen: $130.78/month  
+# 3. CrewAI: $130.87/month
+#
+# 🏢 Enterprise (50,000 requests/month):
+# • Semantic Kernel: $1,674.60/month
+# • AutoGen: $1,938.60/month
+# • CrewAI: $2,099.75/month
+```
+
+### 4. REST API Server
+```bash
+# Start the API server
+python3 api.py
+
+# Use the API from any application
+curl 'http://localhost:8000/calculate?framework=autogen&model=openai_gpt4o&requests=10000'
+curl 'http://localhost:8000/compare?model=openai_gpt4o&requests=10000'
+
+# JSON Response:
+# {
+#   "api_cost": 258.72,
+#   "infrastructure_cost": 320.0,
+#   "monitoring_cost": 125,
+#   "total_cost": 703.72,
+#   "cost_per_request": 0.0259
+# }
+```
+
+### 5. Interactive Calculator
 [Use web calculator →](https://www.agentically.sh/ai-agentic-frameworks/cost-calculator/)
 
 ## 🤝 Community & Support

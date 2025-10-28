@@ -1,0 +1,16 @@
+# Framework Cost Calculator Dependencies
+# Basic Python dependencies for the cost calculator
+
+# No external dependencies required - uses only Python standard library
+# The calculator is designed to be lightweight and dependency-free
+
+# Optional: For web interface development (Phase 2)
+# flask>=3.0.0
+# requests>=2.31.0
+# pandas>=2.1.0
+# matplotlib>=3.7.0
+
+# Optional: For advanced analytics (Phase 3)  
+# numpy>=1.24.0
+# plotly>=5.17.0
+# dash>=2.14.0
