@@ -1,0 +1,435 @@
+{% extends "base.html" %}
+
+{% block title %}API Documentation - AI Framework Cost Calculator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-5 fw-bold text-dark mb-4">
+            <i class="fas fa-code me-3"></i>
+            API Documentation
+        </h1>
+        <p class="lead text-muted mb-5">
+            Integrate cost calculations into your applications with our RESTful API.
+            Get real-time pricing data and framework comparisons programmatically.
+        </p>
+    </div>
+</div>
+
+<!-- API Overview -->
+<div class="row">
+    <div class="col-12 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-info-circle me-2"></i>
+                    API Overview
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h6 class="fw-bold">Base URL</h6>
+                        <code class="bg-light p-2 rounded d-block">http://localhost:5000/api</code>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="fw-bold">Content Type</h6>
+                        <code class="bg-light p-2 rounded d-block">application/json</code>
+                    </div>
+                    <div class="col-md-4">
+                        <h6 class="fw-bold">Authentication</h6>
+                        <span class="badge bg-success">None Required</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- API Endpoints -->
+<div class="row">
+    <div class="col-lg-8">
+        <!-- Calculate Endpoint -->
+        <div class="card mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <span class="badge bg-light text-dark me-2">POST</span>
+                    /api/calculate
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Calculate monthly costs for a specific framework and model combination.</p>
+                
+                <h6 class="fw-bold">Request Body</h6>
+                <pre class="bg-light p-3 rounded"><code>{
+  "framework": "autogen",
+  "model": "openai_gpt4o",
+  "requests_per_month": 10000,
+  "custom_tokens": 1500  // optional
+}</code></pre>
+                
+                <h6 class="fw-bold mt-3">Response</h6>
+                <pre class="bg-light p-3 rounded"><code>{
+  "success": true,
+  "data": {
+    "api_cost": 156.24,
+    "infrastructure_cost": 175.00,
+    "monitoring_cost": 45.00,
+    "total_cost": 376.24,
+    "cost_per_request": 0.0376
+  }
+}</code></pre>
+                
+                <button class="btn btn-success mt-3" onclick="testCalculateAPI()">
+                    <i class="fas fa-play me-2"></i>Test API
+                </button>
+            </div>
+        </div>
+        
+        <!-- Compare Endpoint -->
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <span class="badge bg-light text-dark me-2">POST</span>
+                    /api/compare
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Compare costs across all available frameworks for given parameters.</p>
+                
+                <h6 class="fw-bold">Request Body</h6>
+                <pre class="bg-light p-3 rounded"><code>{
+  "model": "openai_gpt4o",
+  "requests_per_month": 10000,
+  "custom_tokens": 1500  // optional
+}</code></pre>
+                
+                <h6 class="fw-bold mt-3">Response</h6>
+                <pre class="bg-light p-3 rounded"><code>{
+  "success": true,
+  "data": {
+    "semantic_kernel": {
+      "framework_name": "Semantic Kernel",
+      "description": "Enterprise integration",
+      "api_cost": 142.80,
+      "infrastructure_cost": 175.00,
+      "monitoring_cost": 45.00,
+      "total_cost": 362.80,
+      "cost_per_request": 0.0363
+    },
+    // ... other frameworks
+  }
+}</code></pre>
+                
+                <button class="btn btn-info mt-3" onclick="testCompareAPI()">
+                    <i class="fas fa-play me-2"></i>Test API
+                </button>
+            </div>
+        </div>
+        
+        <!-- Migration Endpoint -->
+        <div class="card mb-4">
+            <div class="card-header bg-warning text-white">
+                <h5 class="card-title mb-0">
+                    <span class="badge bg-light text-dark me-2">POST</span>
+                    /api/migration
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Calculate migration savings between two frameworks.</p>
+                
+                <h6 class="fw-bold">Request Body</h6>
+                <pre class="bg-light p-3 rounded"><code>{
+  "from_framework": "langchain",
+  "to_framework": "autogen",
+  "model": "openai_gpt4o",
+  "requests_per_month": 10000
+}</code></pre>
+                
+                <h6 class="fw-bold mt-3">Response</h6>
+                <pre class="bg-light p-3 rounded"><code>{
+  "success": true,
+  "data": {
+    "current_monthly_cost": 412.50,
+    "new_monthly_cost": 376.24,
+    "monthly_savings": 36.26,
+    "annual_savings": 435.12,
+    "savings_percentage": 8.8
+  }
+}</code></pre>
+                
+                <button class="btn btn-warning mt-3" onclick="testMigrationAPI()">
+                    <i class="fas fa-play me-2"></i>Test API
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="col-lg-4">
+        <!-- Reference Data -->
+        <div class="card mb-4">
+            <div class="card-header bg-dark text-white">
+                <h6 class="card-title mb-0">
+                    <i class="fas fa-database me-2"></i>
+                    Reference Data
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark btn-sm w-100" onclick="showModels()">
+                        <i class="fas fa-brain me-2"></i>Available Models
+                    </button>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-outline-dark btn-sm w-100" onclick="showFrameworks()">
+                        <i class="fas fa-cogs me-2"></i>Available Frameworks
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Code Examples -->
+        <div class="card mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h6 class="card-title mb-0">
+                    <i class="fas fa-code me-2"></i>
+                    Code Examples
+                </h6>
+            </div>
+            <div class="card-body">
+                <h6 class="fw-bold">Python</h6>
+                <pre class="bg-light p-2 rounded small"><code>import requests
+
+url = "http://localhost:5000/api/compare"
+data = {
+    "model": "openai_gpt4o",
+    "requests_per_month": 10000
+}
+
+response = requests.post(url, json=data)
+result = response.json()
+
+if result["success"]:
+    print(f"Best option: {result['data']}")
+</code></pre>
+                
+                <h6 class="fw-bold mt-3">JavaScript</h6>
+                <pre class="bg-light p-2 rounded small"><code>const response = await fetch('/api/compare', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        model: 'openai_gpt4o',
+        requests_per_month: 10000
+    })
+});
+
+const result = await response.json();
+if (result.success) {
+    console.log(result.data);
+}
+</code></pre>
+                
+                <h6 class="fw-bold mt-3">cURL</h6>
+                <pre class="bg-light p-2 rounded small"><code>curl -X POST http://localhost:5000/api/compare \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "openai_gpt4o",
+    "requests_per_month": 10000
+  }'
+</code></pre>
+            </div>
+        </div>
+        
+        <!-- Error Codes -->
+        <div class="card">
+            <div class="card-header bg-danger text-white">
+                <h6 class="card-title mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Error Handling
+                </h6>
+            </div>
+            <div class="card-body">
+                <p class="small">All endpoints return standardized error responses:</p>
+                <pre class="bg-light p-2 rounded small"><code>{
+  "success": false,
+  "error": "Error message here"
+}</code></pre>
+                
+                <p class="small mt-2"><strong>Common HTTP Status Codes:</strong></p>
+                <ul class="small">
+                    <li><code>200</code> - Success</li>
+                    <li><code>400</code> - Bad Request</li>
+                    <li><code>500</code> - Server Error</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Test Results Modal -->
+<div class="modal fade" id="apiTestModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">API Test Result</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <pre id="apiTestResult" class="bg-light p-3 rounded"></pre>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reference Data Modal -->
+<div class="modal fade" id="referenceModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="referenceModalTitle">Reference Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="referenceContent"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+async function testCalculateAPI() {
+    const testData = {
+        framework: "autogen",
+        model: "openai_gpt4o",
+        requests_per_month: 10000,
+        custom_tokens: 1500
+    };
+    
+    try {
+        const response = await fetch('/api/calculate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(testData)
+        });
+        
+        const result = await response.json();
+        document.getElementById('apiTestResult').textContent = JSON.stringify(result, null, 2);
+        new bootstrap.Modal(document.getElementById('apiTestModal')).show();
+    } catch (error) {
+        document.getElementById('apiTestResult').textContent = 'Error: ' + error.message;
+        new bootstrap.Modal(document.getElementById('apiTestModal')).show();
+    }
+}
+
+async function testCompareAPI() {
+    const testData = {
+        model: "openai_gpt4o",
+        requests_per_month: 10000
+    };
+    
+    try {
+        const response = await fetch('/api/compare', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(testData)
+        });
+        
+        const result = await response.json();
+        document.getElementById('apiTestResult').textContent = JSON.stringify(result, null, 2);
+        new bootstrap.Modal(document.getElementById('apiTestModal')).show();
+    } catch (error) {
+        document.getElementById('apiTestResult').textContent = 'Error: ' + error.message;
+        new bootstrap.Modal(document.getElementById('apiTestModal')).show();
+    }
+}
+
+async function testMigrationAPI() {
+    const testData = {
+        from_framework: "langchain",
+        to_framework: "autogen",
+        model: "openai_gpt4o",
+        requests_per_month: 10000
+    };
+    
+    try {
+        const response = await fetch('/api/migration', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(testData)
+        });
+        
+        const result = await response.json();
+        document.getElementById('apiTestResult').textContent = JSON.stringify(result, null, 2);
+        new bootstrap.Modal(document.getElementById('apiTestModal')).show();
+    } catch (error) {
+        document.getElementById('apiTestResult').textContent = 'Error: ' + error.message;
+        new bootstrap.Modal(document.getElementById('apiTestModal')).show();
+    }
+}
+
+async function showModels() {
+    try {
+        const response = await fetch('/api/models');
+        const result = await response.json();
+        
+        let html = '<h6>Available AI Models</h6><div class="table-responsive"><table class="table table-sm">';
+        html += '<thead><tr><th>Model</th><th>Input Cost</th><th>Output Cost</th><th>Avg Cost</th></tr></thead><tbody>';
+        
+        for (const [key, model] of Object.entries(result)) {
+            html += `<tr>
+                <td><code>${key}</code></td>
+                <td>$${model.input_cost}/1M</td>
+                <td>$${model.output_cost}/1M</td>
+                <td>$${model.average_cost.toFixed(2)}/1M</td>
+            </tr>`;
+        }
+        
+        html += '</tbody></table></div>';
+        
+        document.getElementById('referenceModalTitle').textContent = 'Available Models';
+        document.getElementById('referenceContent').innerHTML = html;
+        new bootstrap.Modal(document.getElementById('referenceModal')).show();
+    } catch (error) {
+        showError('Failed to load models data');
+    }
+}
+
+async function showFrameworks() {
+    try {
+        const response = await fetch('/api/frameworks');
+        const result = await response.json();
+        
+        let html = '<h6>Available Frameworks</h6><div class="table-responsive"><table class="table table-sm">';
+        html += '<thead><tr><th>Framework</th><th>Description</th><th>Avg Tokens</th><th>Efficiency</th></tr></thead><tbody>';
+        
+        for (const [key, framework] of Object.entries(result)) {
+            html += `<tr>
+                <td><code>${key}</code></td>
+                <td>${framework.description}</td>
+                <td>${framework.avg_tokens}</td>
+                <td>${(framework.efficiency * 100).toFixed(1)}%</td>
+            </tr>`;
+        }
+        
+        html += '</tbody></table></div>';
+        
+        document.getElementById('referenceModalTitle').textContent = 'Available Frameworks';
+        document.getElementById('referenceContent').innerHTML = html;
+        new bootstrap.Modal(document.getElementById('referenceModal')).show();
+    } catch (error) {
+        showError('Failed to load frameworks data');
+    }
+}
+</script>
+{% endblock %}

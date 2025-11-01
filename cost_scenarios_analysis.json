@@ -1,0 +1,1097 @@
+{
+  "scenarios": {
+    "startup_mvp": {
+      "scenario": {
+        "name": "Startup MVP",
+        "description": "Early-stage startup building minimum viable product",
+        "requests_per_month": 1000,
+        "model": "openai_gpt4o_mini",
+        "custom_tokens": 800,
+        "business_context": {
+          "team_size": "2-5 developers",
+          "budget": "Limited seed funding",
+          "timeline": "3-6 months to market",
+          "priorities": [
+            "Cost efficiency",
+            "Speed to market",
+            "Simplicity"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 0.27,
+          "infrastructure_cost": 85.0,
+          "monitoring_cost": 45,
+          "total_cost": 130.27,
+          "cost_per_request": 0.0003,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 0.3,
+          "infrastructure_cost": 85.0,
+          "monitoring_cost": 45,
+          "total_cost": 130.3,
+          "cost_per_request": 0.0003,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 0.3,
+          "infrastructure_cost": 85.0,
+          "monitoring_cost": 45,
+          "total_cost": 130.3,
+          "cost_per_request": 0.0003,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 0.31,
+          "infrastructure_cost": 85.0,
+          "monitoring_cost": 45,
+          "total_cost": 130.31,
+          "cost_per_request": 0.0003,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 0.32,
+          "infrastructure_cost": 85.0,
+          "monitoring_cost": 45,
+          "total_cost": 130.32,
+          "cost_per_request": 0.0003,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 130.27,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 130.32,
+        "max_monthly_savings": 0.04999999999998295,
+        "max_annual_savings": 0.5999999999997954,
+        "savings_percentage": 0.03836709637813302
+      },
+      "recommendations": [
+        {
+          "category": "Budget Optimization",
+          "framework": "semantic_kernel",
+          "reasoning": "For 1,000 requests/month, Semantic Kernel offers the best cost efficiency at $130.27/month",
+          "priority": "high",
+          "savings": "$1/year vs most expensive option"
+        },
+        {
+          "category": "Innovation & Flexibility",
+          "framework": "autogen",
+          "reasoning": "AutoGen offers cutting-edge multi-agent capabilities and research-grade features for experimental use cases",
+          "priority": "medium",
+          "experimental_benefits": [
+            "Multi-agent conversations",
+            "Latest research features",
+            "Flexible architectures",
+            "Active development"
+          ]
+        }
+      ],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 1563.2400000000002,
+          "total_first_year_cost": 26563.24,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 29689.72
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 1563.6000000000001,
+          "total_first_year_cost": 36563.6,
+          "annual_cost_vs_best": 0.36000000000001364,
+          "payback_period_months": 97222.22222221854,
+          "three_year_tco": 39690.8
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 1563.6000000000001,
+          "total_first_year_cost": 31563.6,
+          "annual_cost_vs_best": 0.36000000000001364,
+          "payback_period_months": 83333.33333333017,
+          "three_year_tco": 34690.8
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 1563.72,
+          "total_first_year_cost": 41563.72,
+          "annual_cost_vs_best": 0.4799999999999045,
+          "payback_period_months": 83333.33333334992,
+          "three_year_tco": 44691.16
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 1563.84,
+          "total_first_year_cost": 46563.84,
+          "annual_cost_vs_best": 0.5999999999997954,
+          "payback_period_months": 75000.00000002558,
+          "three_year_tco": 49691.52
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076262"
+    },
+    "saas_growth": {
+      "scenario": {
+        "name": "SaaS Growth Stage",
+        "description": "Growing SaaS company scaling user base",
+        "requests_per_month": 25000,
+        "model": "openai_gpt4o",
+        "custom_tokens": 1200,
+        "business_context": {
+          "team_size": "10-20 developers",
+          "budget": "Series A funded",
+          "timeline": "12-18 months scaling",
+          "priorities": [
+            "Scalability",
+            "Performance",
+            "Feature velocity"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 343.2,
+          "infrastructure_cost": 395.0,
+          "monitoring_cost": 125,
+          "total_cost": 863.2,
+          "cost_per_request": 0.0137,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 369.6,
+          "infrastructure_cost": 395.0,
+          "monitoring_cost": 125,
+          "total_cost": 889.6,
+          "cost_per_request": 0.0148,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 379.5,
+          "infrastructure_cost": 395.0,
+          "monitoring_cost": 125,
+          "total_cost": 899.5,
+          "cost_per_request": 0.0152,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 382.8,
+          "infrastructure_cost": 395.0,
+          "monitoring_cost": 125,
+          "total_cost": 902.8,
+          "cost_per_request": 0.0153,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 396.0,
+          "infrastructure_cost": 395.0,
+          "monitoring_cost": 125,
+          "total_cost": 916.0,
+          "cost_per_request": 0.0158,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 863.2,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 916.0,
+        "max_monthly_savings": 52.799999999999955,
+        "max_annual_savings": 633.5999999999995,
+        "savings_percentage": 5.764192139737986
+      },
+      "recommendations": [],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 10358.400000000001,
+          "total_first_year_cost": 35358.4,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 56075.200000000004
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 10675.2,
+          "total_first_year_cost": 45675.2,
+          "annual_cost_vs_best": 316.7999999999997,
+          "payback_period_months": 110.47979797979808,
+          "three_year_tco": 67025.6
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 10794.0,
+          "total_first_year_cost": 40794.0,
+          "annual_cost_vs_best": 435.59999999999945,
+          "payback_period_months": 68.87052341597804,
+          "three_year_tco": 62382.0
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 10833.599999999999,
+          "total_first_year_cost": 50833.6,
+          "annual_cost_vs_best": 475.1999999999989,
+          "payback_period_months": 84.17508417508436,
+          "three_year_tco": 72500.79999999999
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 10992.0,
+          "total_first_year_cost": 55992.0,
+          "annual_cost_vs_best": 633.5999999999995,
+          "payback_period_months": 71.02272727272734,
+          "three_year_tco": 77976.0
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076288"
+    },
+    "enterprise_deployment": {
+      "scenario": {
+        "name": "Enterprise Deployment",
+        "description": "Large enterprise with compliance requirements",
+        "requests_per_month": 100000,
+        "model": "claude_35_sonnet",
+        "custom_tokens": 2000,
+        "business_context": {
+          "team_size": "50+ developers",
+          "budget": "Enterprise budget",
+          "timeline": "Multi-year deployment",
+          "priorities": [
+            "Security",
+            "Compliance",
+            "Reliability",
+            "Support"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 1622.4,
+          "infrastructure_cost": 850.0,
+          "monitoring_cost": 250,
+          "total_cost": 2722.4,
+          "cost_per_request": 0.0162,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 1747.2,
+          "infrastructure_cost": 850.0,
+          "monitoring_cost": 250,
+          "total_cost": 2847.2,
+          "cost_per_request": 0.0175,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 1794.0,
+          "infrastructure_cost": 850.0,
+          "monitoring_cost": 250,
+          "total_cost": 2894.0,
+          "cost_per_request": 0.0179,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 1809.6,
+          "infrastructure_cost": 850.0,
+          "monitoring_cost": 250,
+          "total_cost": 2909.6,
+          "cost_per_request": 0.0181,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 1872.0,
+          "infrastructure_cost": 850.0,
+          "monitoring_cost": 250,
+          "total_cost": 2972.0,
+          "cost_per_request": 0.0187,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 2722.4,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 2972.0,
+        "max_monthly_savings": 249.5999999999999,
+        "max_annual_savings": 2995.199999999999,
+        "savings_percentage": 8.39838492597577
+      },
+      "recommendations": [
+        {
+          "category": "Performance & Scale",
+          "framework": "semantic_kernel",
+          "reasoning": "Semantic Kernel offers excellent performance at scale with enterprise-grade reliability",
+          "priority": "medium",
+          "cost_premium": "$0.00/month premium for enhanced capabilities"
+        },
+        {
+          "category": "Enterprise Ready",
+          "framework": "semantic_kernel",
+          "reasoning": "Semantic Kernel provides enterprise integration, security features, and Microsoft ecosystem compatibility",
+          "priority": "high",
+          "enterprise_benefits": [
+            "Native Azure integration",
+            "Enterprise security",
+            "Professional support",
+            "Compliance features"
+          ]
+        }
+      ],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 32668.800000000003,
+          "total_first_year_cost": 57668.8,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 123006.40000000001
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 34166.399999999994,
+          "total_first_year_cost": 69166.4,
+          "annual_cost_vs_best": 1497.5999999999967,
+          "payback_period_months": 23.370726495726547,
+          "three_year_tco": 137499.19999999998
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 34728.0,
+          "total_first_year_cost": 64728.0,
+          "annual_cost_vs_best": 2059.199999999999,
+          "payback_period_months": 14.568764568764577,
+          "three_year_tco": 134184.0
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 34915.2,
+          "total_first_year_cost": 74915.2,
+          "annual_cost_vs_best": 2246.399999999998,
+          "payback_period_months": 17.806267806267822,
+          "three_year_tco": 144745.59999999998
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 35664.0,
+          "total_first_year_cost": 80664.0,
+          "annual_cost_vs_best": 2995.199999999999,
+          "payback_period_months": 15.024038461538467,
+          "three_year_tco": 151992.0
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076309"
+    },
+    "ai_research_lab": {
+      "scenario": {
+        "name": "AI Research Lab",
+        "description": "Research institution exploring AI capabilities",
+        "requests_per_month": 15000,
+        "model": "openai_gpt4o",
+        "custom_tokens": 3000,
+        "business_context": {
+          "team_size": "5-15 researchers",
+          "budget": "Grant funding",
+          "timeline": "1-3 year projects",
+          "priorities": [
+            "Experimental features",
+            "Flexibility",
+            "Research capabilities"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 514.8,
+          "infrastructure_cost": 345.0,
+          "monitoring_cost": 125,
+          "total_cost": 984.8,
+          "cost_per_request": 0.0343,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 554.4,
+          "infrastructure_cost": 345.0,
+          "monitoring_cost": 125,
+          "total_cost": 1024.4,
+          "cost_per_request": 0.037,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 569.25,
+          "infrastructure_cost": 345.0,
+          "monitoring_cost": 125,
+          "total_cost": 1039.25,
+          "cost_per_request": 0.0379,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 574.2,
+          "infrastructure_cost": 345.0,
+          "monitoring_cost": 125,
+          "total_cost": 1044.2,
+          "cost_per_request": 0.0383,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 594.0,
+          "infrastructure_cost": 345.0,
+          "monitoring_cost": 125,
+          "total_cost": 1064.0,
+          "cost_per_request": 0.0396,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 984.8,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 1064.0,
+        "max_monthly_savings": 79.20000000000005,
+        "max_annual_savings": 950.4000000000005,
+        "savings_percentage": 7.443609022556395
+      },
+      "recommendations": [
+        {
+          "category": "Innovation & Flexibility",
+          "framework": "autogen",
+          "reasoning": "AutoGen offers cutting-edge multi-agent capabilities and research-grade features for experimental use cases",
+          "priority": "medium",
+          "experimental_benefits": [
+            "Multi-agent conversations",
+            "Latest research features",
+            "Flexible architectures",
+            "Active development"
+          ]
+        }
+      ],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 11817.599999999999,
+          "total_first_year_cost": 36817.6,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 60452.799999999996
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 12292.800000000001,
+          "total_first_year_cost": 47292.8,
+          "annual_cost_vs_best": 475.20000000000164,
+          "payback_period_months": 73.6531986531984,
+          "three_year_tco": 71878.4
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 12471.0,
+          "total_first_year_cost": 42471.0,
+          "annual_cost_vs_best": 653.4000000000005,
+          "payback_period_months": 45.9136822773186,
+          "three_year_tco": 67413.0
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 12530.400000000001,
+          "total_first_year_cost": 52530.4,
+          "annual_cost_vs_best": 712.8000000000011,
+          "payback_period_months": 56.11672278338936,
+          "three_year_tco": 77591.20000000001
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 12768.0,
+          "total_first_year_cost": 57768.0,
+          "annual_cost_vs_best": 950.4000000000005,
+          "payback_period_months": 47.34848484848482,
+          "three_year_tco": 83304.0
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076327"
+    },
+    "ecommerce_platform": {
+      "scenario": {
+        "name": "E-commerce Platform",
+        "description": "Online retail platform with AI-powered features",
+        "requests_per_month": 75000,
+        "model": "openai_gpt4o",
+        "custom_tokens": 1500,
+        "business_context": {
+          "team_size": "20-40 developers",
+          "budget": "Revenue-funded growth",
+          "timeline": "Continuous deployment",
+          "priorities": [
+            "Customer experience",
+            "Conversion rates",
+            "Cost optimization"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 1287.0,
+          "infrastructure_cost": 645.0,
+          "monitoring_cost": 125,
+          "total_cost": 2057.0,
+          "cost_per_request": 0.0172,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 1386.0,
+          "infrastructure_cost": 645.0,
+          "monitoring_cost": 125,
+          "total_cost": 2156.0,
+          "cost_per_request": 0.0185,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 1423.12,
+          "infrastructure_cost": 645.0,
+          "monitoring_cost": 125,
+          "total_cost": 2193.12,
+          "cost_per_request": 0.019,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 1435.5,
+          "infrastructure_cost": 645.0,
+          "monitoring_cost": 125,
+          "total_cost": 2205.5,
+          "cost_per_request": 0.0191,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 1485.0,
+          "infrastructure_cost": 645.0,
+          "monitoring_cost": 125,
+          "total_cost": 2255.0,
+          "cost_per_request": 0.0198,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 2057.0,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 2255.0,
+        "max_monthly_savings": 198.0,
+        "max_annual_savings": 2376.0,
+        "savings_percentage": 8.780487804878048
+      },
+      "recommendations": [
+        {
+          "category": "Performance & Scale",
+          "framework": "semantic_kernel",
+          "reasoning": "Semantic Kernel offers excellent performance at scale with enterprise-grade reliability",
+          "priority": "medium",
+          "cost_premium": "$0.00/month premium for enhanced capabilities"
+        }
+      ],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 24684.0,
+          "total_first_year_cost": 49684.0,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 99052.0
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 25872.0,
+          "total_first_year_cost": 60872.0,
+          "annual_cost_vs_best": 1188.0,
+          "payback_period_months": 29.46127946127946,
+          "three_year_tco": 112616.0
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 26317.44,
+          "total_first_year_cost": 56317.44,
+          "annual_cost_vs_best": 1633.4399999999987,
+          "payback_period_months": 18.36614751689687,
+          "three_year_tco": 108952.31999999999
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 26466.0,
+          "total_first_year_cost": 66466.0,
+          "annual_cost_vs_best": 1782.0,
+          "payback_period_months": 22.44668911335578,
+          "three_year_tco": 119398.0
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 27060.0,
+          "total_first_year_cost": 72060.0,
+          "annual_cost_vs_best": 2376.0,
+          "payback_period_months": 18.939393939393938,
+          "three_year_tco": 126180.0
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076347"
+    },
+    "healthcare_startup": {
+      "scenario": {
+        "name": "Healthcare AI Startup",
+        "description": "Digital health company with AI diagnostics",
+        "requests_per_month": 8000,
+        "model": "claude_35_sonnet",
+        "custom_tokens": 2500,
+        "business_context": {
+          "team_size": "10-25 developers",
+          "budget": "Series A/B funding",
+          "timeline": "18-24 months to regulatory approval",
+          "priorities": [
+            "Regulatory compliance",
+            "Accuracy",
+            "Privacy",
+            "Auditability"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 162.24,
+          "infrastructure_cost": 155.0,
+          "monitoring_cost": 45,
+          "total_cost": 362.24,
+          "cost_per_request": 0.0203,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 174.72,
+          "infrastructure_cost": 155.0,
+          "monitoring_cost": 45,
+          "total_cost": 374.72,
+          "cost_per_request": 0.0218,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 179.4,
+          "infrastructure_cost": 155.0,
+          "monitoring_cost": 45,
+          "total_cost": 379.4,
+          "cost_per_request": 0.0224,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 180.96,
+          "infrastructure_cost": 155.0,
+          "monitoring_cost": 45,
+          "total_cost": 380.96,
+          "cost_per_request": 0.0226,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 187.2,
+          "infrastructure_cost": 155.0,
+          "monitoring_cost": 45,
+          "total_cost": 387.2,
+          "cost_per_request": 0.0234,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 362.24,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 387.2,
+        "max_monthly_savings": 24.95999999999998,
+        "max_annual_savings": 299.51999999999975,
+        "savings_percentage": 6.446280991735533
+      },
+      "recommendations": [
+        {
+          "category": "Budget Optimization",
+          "framework": "semantic_kernel",
+          "reasoning": "For 8,000 requests/month, Semantic Kernel offers the best cost efficiency at $362.24/month",
+          "priority": "high",
+          "savings": "$300/year vs most expensive option"
+        },
+        {
+          "category": "Innovation & Flexibility",
+          "framework": "autogen",
+          "reasoning": "AutoGen offers cutting-edge multi-agent capabilities and research-grade features for experimental use cases",
+          "priority": "medium",
+          "experimental_benefits": [
+            "Multi-agent conversations",
+            "Latest research features",
+            "Flexible architectures",
+            "Active development"
+          ]
+        }
+      ],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 4346.88,
+          "total_first_year_cost": 29346.88,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 38040.64
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 4496.64,
+          "total_first_year_cost": 39496.64,
+          "annual_cost_vs_best": 149.76000000000022,
+          "payback_period_months": 233.7072649572646,
+          "three_year_tco": 48489.92
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 4552.799999999999,
+          "total_first_year_cost": 34552.8,
+          "annual_cost_vs_best": 205.91999999999962,
+          "payback_period_months": 145.68764568764595,
+          "three_year_tco": 43658.399999999994
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 4571.5199999999995,
+          "total_first_year_cost": 44571.52,
+          "annual_cost_vs_best": 224.63999999999965,
+          "payback_period_months": 178.06267806267834,
+          "three_year_tco": 53714.56
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 4646.4,
+          "total_first_year_cost": 49646.4,
+          "annual_cost_vs_best": 299.51999999999975,
+          "payback_period_months": 150.24038461538473,
+          "three_year_tco": 58939.2
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076365"
+    },
+    "fintech_robo_advisor": {
+      "scenario": {
+        "name": "FinTech Robo-Advisor",
+        "description": "Automated investment platform with AI recommendations",
+        "requests_per_month": 45000,
+        "model": "openai_gpt4o",
+        "custom_tokens": 1800,
+        "business_context": {
+          "team_size": "15-30 developers",
+          "budget": "Well-funded growth stage",
+          "timeline": "Continuous optimization",
+          "priorities": [
+            "Regulatory compliance",
+            "Performance",
+            "Risk management",
+            "Cost efficiency"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 926.64,
+          "infrastructure_cost": 495.0,
+          "monitoring_cost": 125,
+          "total_cost": 1546.64,
+          "cost_per_request": 0.0206,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 997.92,
+          "infrastructure_cost": 495.0,
+          "monitoring_cost": 125,
+          "total_cost": 1617.92,
+          "cost_per_request": 0.0222,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 1024.65,
+          "infrastructure_cost": 495.0,
+          "monitoring_cost": 125,
+          "total_cost": 1644.65,
+          "cost_per_request": 0.0228,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 1033.56,
+          "infrastructure_cost": 495.0,
+          "monitoring_cost": 125,
+          "total_cost": 1653.56,
+          "cost_per_request": 0.023,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 1069.2,
+          "infrastructure_cost": 495.0,
+          "monitoring_cost": 125,
+          "total_cost": 1689.2,
+          "cost_per_request": 0.0238,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 1546.64,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 1689.2,
+        "max_monthly_savings": 142.55999999999995,
+        "max_annual_savings": 1710.7199999999993,
+        "savings_percentage": 8.439497987212878
+      },
+      "recommendations": [],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 18559.68,
+          "total_first_year_cost": 43559.68,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 80679.04000000001
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 19415.04,
+          "total_first_year_cost": 54415.04,
+          "annual_cost_vs_best": 855.3599999999997,
+          "payback_period_months": 40.91844369622149,
+          "three_year_tco": 93245.12
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 19735.800000000003,
+          "total_first_year_cost": 49735.8,
+          "annual_cost_vs_best": 1176.12,
+          "payback_period_months": 25.507601265177026,
+          "three_year_tco": 89207.40000000001
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 19842.72,
+          "total_first_year_cost": 59842.72,
+          "annual_cost_vs_best": 1283.0399999999981,
+          "payback_period_months": 31.17595710188307,
+          "three_year_tco": 99528.16
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 20270.4,
+          "total_first_year_cost": 65270.4,
+          "annual_cost_vs_best": 1710.7199999999993,
+          "payback_period_months": 26.304713804713813,
+          "three_year_tco": 105811.20000000001
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076382"
+    },
+    "content_creation_platform": {
+      "scenario": {
+        "name": "Content Creation Platform",
+        "description": "AI-powered content generation for marketing teams",
+        "requests_per_month": 35000,
+        "model": "openai_gpt4o",
+        "custom_tokens": 2200,
+        "business_context": {
+          "team_size": "8-20 developers",
+          "budget": "Bootstrap/Series A",
+          "timeline": "6-12 months to profitability",
+          "priorities": [
+            "Content quality",
+            "Speed",
+            "Cost per output",
+            "Scalability"
+          ]
+        }
+      },
+      "framework_comparison": {
+        "semantic_kernel": {
+          "api_cost": 880.88,
+          "infrastructure_cost": 445.0,
+          "monitoring_cost": 125,
+          "total_cost": 1450.88,
+          "cost_per_request": 0.0252,
+          "framework_name": "Semantic Kernel",
+          "description": "Enterprise integration"
+        },
+        "autogen": {
+          "api_cost": 948.64,
+          "infrastructure_cost": 445.0,
+          "monitoring_cost": 125,
+          "total_cost": 1518.64,
+          "cost_per_request": 0.0271,
+          "framework_name": "Autogen",
+          "description": "Research & development"
+        },
+        "crewai": {
+          "api_cost": 974.05,
+          "infrastructure_cost": 445.0,
+          "monitoring_cost": 125,
+          "total_cost": 1544.05,
+          "cost_per_request": 0.0278,
+          "framework_name": "Crewai",
+          "description": "Multi-agent systems"
+        },
+        "langchain": {
+          "api_cost": 982.52,
+          "infrastructure_cost": 445.0,
+          "monitoring_cost": 125,
+          "total_cost": 1552.52,
+          "cost_per_request": 0.0281,
+          "framework_name": "Langchain",
+          "description": "Flexible applications"
+        },
+        "langgraph": {
+          "api_cost": 1016.4,
+          "infrastructure_cost": 445.0,
+          "monitoring_cost": 125,
+          "total_cost": 1586.4,
+          "cost_per_request": 0.029,
+          "framework_name": "Langgraph",
+          "description": "Stateful workflows"
+        }
+      },
+      "cost_summary": {
+        "best_option": "semantic_kernel",
+        "best_monthly_cost": 1450.88,
+        "most_expensive": "langgraph",
+        "highest_monthly_cost": 1586.4,
+        "max_monthly_savings": 135.51999999999998,
+        "max_annual_savings": 1626.2399999999998,
+        "savings_percentage": 8.542612203731718
+      },
+      "recommendations": [],
+      "roi_analysis": {
+        "semantic_kernel": {
+          "framework_name": "Semantic Kernel",
+          "development_cost": 25000,
+          "annual_operating_cost": 17410.56,
+          "total_first_year_cost": 42410.56,
+          "annual_cost_vs_best": 0,
+          "payback_period_months": 0,
+          "three_year_tco": 77231.68000000001
+        },
+        "autogen": {
+          "framework_name": "Autogen",
+          "development_cost": 35000,
+          "annual_operating_cost": 18223.68,
+          "total_first_year_cost": 53223.68,
+          "annual_cost_vs_best": 813.1199999999999,
+          "payback_period_months": 43.04407713498623,
+          "three_year_tco": 89671.04000000001
+        },
+        "crewai": {
+          "framework_name": "Crewai",
+          "development_cost": 30000,
+          "annual_operating_cost": 18528.6,
+          "total_first_year_cost": 48528.6,
+          "annual_cost_vs_best": 1118.0399999999981,
+          "payback_period_months": 26.83267146077068,
+          "three_year_tco": 85585.79999999999
+        },
+        "langchain": {
+          "framework_name": "Langchain",
+          "development_cost": 40000,
+          "annual_operating_cost": 18630.239999999998,
+          "total_first_year_cost": 58630.24,
+          "annual_cost_vs_best": 1219.6799999999985,
+          "payback_period_months": 32.795487340941925,
+          "three_year_tco": 95890.72
+        },
+        "langgraph": {
+          "framework_name": "Langgraph",
+          "development_cost": 45000,
+          "annual_operating_cost": 19036.800000000003,
+          "total_first_year_cost": 64036.8,
+          "annual_cost_vs_best": 1626.2399999999998,
+          "payback_period_months": 27.671192443919722,
+          "three_year_tco": 102110.40000000001
+        }
+      },
+      "generated_at": "2025-11-01T10:54:10.076397"
+    }
+  },
+  "summary": {
+    "framework_performance": {
+      "semantic_kernel": {
+        "wins": 8,
+        "win_rate": 1.0
+      }
+    },
+    "average_max_annual_savings": 1324.0349999999996,
+    "key_insights": [
+      "Framework selection can save up to $1,324 annually on average",
+      "Semantic Kernel wins 8/8 scenarios",
+      "AutoGen wins 0/8 scenarios",
+      "Cost optimization varies significantly by use case and scale"
+    ]
+  },
+  "generated_at": "2025-11-01T10:54:10.076404"
+}

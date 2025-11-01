@@ -1,0 +1,477 @@
+{% extends "base.html" %}
+
+{% block title %}Cost Scenarios - AI Framework Cost Calculator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-5 fw-bold text-dark mb-4">
+            <i class="fas fa-chart-line me-3"></i>
+            Real-World Cost Scenarios
+        </h1>
+        <p class="lead text-muted mb-5">
+            Explore cost implications across different usage patterns and business scenarios.
+            Compare frameworks for your specific use case.
+        </p>
+    </div>
+</div>
+
+<!-- Scenario Cards -->
+<div class="row" id="scenarioCards">
+    <div class="col-lg-4 mb-4">
+        <div class="card scenario-card" data-scenario="startup">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-rocket me-2"></i>
+                    Startup MVP
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Small team building initial product with limited budget.</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i>1,000 requests/month</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Basic monitoring</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Cost-sensitive</li>
+                </ul>
+                <button class="btn btn-info w-100" onclick="loadScenario('startup')">
+                    <i class="fas fa-play me-2"></i>Load Scenario
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card scenario-card" data-scenario="growth">
+            <div class="card-header bg-warning text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-line me-2"></i>
+                    Growth Stage
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Scaling product with growing user base and feature demands.</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i>25,000 requests/month</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Performance monitoring</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Reliability focus</li>
+                </ul>
+                <button class="btn btn-warning w-100" onclick="loadScenario('growth')">
+                    <i class="fas fa-play me-2"></i>Load Scenario
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4 mb-4">
+        <div class="card scenario-card" data-scenario="enterprise">
+            <div class="card-header bg-dark text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-building me-2"></i>
+                    Enterprise Scale
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Large-scale deployment with enterprise requirements.</p>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-check text-success me-2"></i>100,000+ requests/month</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Full observability</li>
+                    <li><i class="fas fa-check text-success me-2"></i>High availability</li>
+                </ul>
+                <button class="btn btn-dark w-100" onclick="loadScenario('enterprise')">
+                    <i class="fas fa-play me-2"></i>Load Scenario
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Custom Scenario Builder -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-tools me-2"></i>
+                    Custom Scenario Builder
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="customScenarioForm">
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="scenarioModel" class="form-label">AI Model</label>
+                            <select class="form-select" id="scenarioModel" required>
+                                <option value="openai_gpt4o">OpenAI GPT-4o</option>
+                                <option value="openai_gpt4o_mini">OpenAI GPT-4o Mini</option>
+                                <option value="claude_35_sonnet">Claude 3.5 Sonnet</option>
+                                <option value="local_llm">Local LLM</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col-md-3 mb-3">
+                            <label for="scenarioRequests" class="form-label">Monthly Requests</label>
+                            <input type="number" class="form-control" id="scenarioRequests" value="10000" min="1">
+                        </div>
+                        
+                        <div class="col-md-3 mb-3">
+                            <label for="scenarioTokens" class="form-label">Tokens/Request</label>
+                            <input type="number" class="form-control" id="scenarioTokens" placeholder="Use defaults">
+                        </div>
+                        
+                        <div class="col-md-3 mb-3">
+                            <label class="form-label">&nbsp;</label>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-calculator me-2"></i>Calculate
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Results Section -->
+<div class="row mt-4" id="resultsSection" style="display: none;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-bar me-2"></i>
+                    Scenario Analysis Results
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="scenarioResults"></div>
+                
+                <!-- ROI Analysis -->
+                <div class="mt-4">
+                    <h6 class="fw-bold">ROI Analysis & Recommendations</h6>
+                    <div id="roiAnalysis" class="row"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Comparison Chart -->
+<div class="row mt-4" id="chartSection" style="display: none;">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Monthly Cost Comparison</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="monthlyCostChart"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="card-title mb-0">Annual Savings Potential</h6>
+            </div>
+            <div class="card-body">
+                <canvas id="savingsChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const scenarios = {
+    startup: {
+        model: 'openai_gpt4o_mini',
+        requests_per_month: 1000,
+        custom_tokens: null,
+        description: 'Startup MVP - Cost-optimized for early stage'
+    },
+    growth: {
+        model: 'openai_gpt4o',
+        requests_per_month: 25000,
+        custom_tokens: null,
+        description: 'Growth Stage - Balanced performance and cost'
+    },
+    enterprise: {
+        model: 'claude_35_sonnet',
+        requests_per_month: 100000,
+        custom_tokens: 2000,
+        description: 'Enterprise Scale - Performance-optimized'
+    }
+};
+
+let monthlyCostChart = null;
+let savingsChart = null;
+
+function loadScenario(scenarioKey) {
+    const scenario = scenarios[scenarioKey];
+    
+    document.getElementById('scenarioModel').value = scenario.model;
+    document.getElementById('scenarioRequests').value = scenario.requests_per_month;
+    document.getElementById('scenarioTokens').value = scenario.custom_tokens || '';
+    
+    // Highlight selected scenario
+    document.querySelectorAll('.scenario-card').forEach(card => {
+        card.classList.remove('border-primary');
+    });
+    document.querySelector(`[data-scenario="${scenarioKey}"]`).classList.add('border-primary');
+    
+    // Auto-calculate
+    calculateScenario(scenario.description);
+}
+
+document.getElementById('customScenarioForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    calculateScenario('Custom Scenario');
+});
+
+async function calculateScenario(description) {
+    const submitBtn = document.querySelector('#customScenarioForm button[type="submit"]');
+    showLoading(submitBtn);
+    
+    const formData = {
+        model: document.getElementById('scenarioModel').value,
+        requests_per_month: parseInt(document.getElementById('scenarioRequests').value),
+        custom_tokens: document.getElementById('scenarioTokens').value || null
+    };
+    
+    if (formData.custom_tokens) {
+        formData.custom_tokens = parseInt(formData.custom_tokens);
+    }
+    
+    try {
+        const response = await fetch('/api/compare', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            displayScenarioResults(result.data, description, formData);
+            createScenarioCharts(result.data);
+            document.getElementById('resultsSection').style.display = 'block';
+            document.getElementById('chartSection').style.display = 'block';
+            showSuccess('Scenario analysis completed!');
+        } else {
+            showError('Error: ' + result.error);
+        }
+    } catch (error) {
+        showError('Network error: ' + error.message);
+    } finally {
+        hideLoading(submitBtn, '<i class="fas fa-calculator me-2"></i>Calculate');
+    }
+}
+
+function displayScenarioResults(data, description, params) {
+    const frameworks = Object.entries(data).sort((a, b) => a[1].total_cost - b[1].total_cost);
+    const bestFramework = frameworks[0];
+    const worstFramework = frameworks[frameworks.length - 1];
+    const maxSavings = worstFramework[1].total_cost - bestFramework[1].total_cost;
+    
+    let html = `
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle me-2"></i>
+            <strong>${description}</strong> - ${formatNumber(params.requests_per_month)} requests/month using ${params.model.replace('_', ' ').toUpperCase()}
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Framework</th>
+                        <th>Monthly Cost</th>
+                        <th>Annual Cost</th>
+                        <th>Cost per Request</th>
+                        <th>vs Best</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+    
+    frameworks.forEach(([key, framework], index) => {
+        const annualCost = framework.total_cost * 12;
+        const vsVest = framework.total_cost - bestFramework[1].total_cost;
+        const isWinner = index === 0;
+        const rowClass = isWinner ? 'table-success' : '';
+        
+        html += `
+            <tr class="${rowClass}">
+                <td>
+                    ${isWinner ? '<i class="fas fa-crown text-warning me-1"></i>' : ''}
+                    <strong>${framework.framework_name}</strong>
+                </td>
+                <td class="fw-bold">${formatCurrency(framework.total_cost)}</td>
+                <td>${formatCurrency(annualCost)}</td>
+                <td>${formatCurrency(framework.cost_per_request)}</td>
+                <td class="${vsVest > 0 ? 'text-danger' : 'text-success'}">
+                    ${vsVest > 0 ? '+' : ''}${formatCurrency(vsVest)}
+                </td>
+            </tr>
+        `;
+    });
+    
+    html += '</tbody></table></div>';
+    
+    document.getElementById('scenarioResults').innerHTML = html;
+    
+    // Generate ROI Analysis
+    generateROIAnalysis(frameworks, params);
+}
+
+function generateROIAnalysis(frameworks, params) {
+    const bestFramework = frameworks[0];
+    const worstFramework = frameworks[frameworks.length - 1];
+    const maxAnnualSavings = (worstFramework[1].total_cost - bestFramework[1].total_cost) * 12;
+    
+    let recommendations = [];
+    
+    // Budget recommendation
+    if (params.requests_per_month < 5000) {
+        recommendations.push({
+            icon: 'fas fa-piggy-bank',
+            title: 'Budget Optimization',
+            text: `For low-volume usage, consider ${bestFramework[1].framework_name} to minimize costs.`,
+            color: 'success'
+        });
+    } else if (params.requests_per_month > 50000) {
+        recommendations.push({
+            icon: 'fas fa-tachometer-alt',
+            title: 'Performance Focus',
+            text: 'At high volume, prioritize performance and reliability over cost savings.',
+            color: 'warning'
+        });
+    }
+    
+    // Model recommendation
+    if (params.model.includes('mini')) {
+        recommendations.push({
+            icon: 'fas fa-balance-scale',
+            title: 'Model Selection',
+            text: 'GPT-4o Mini offers excellent cost efficiency for many use cases.',
+            color: 'info'
+        });
+    }
+    
+    // Migration opportunity
+    if (maxAnnualSavings > 1000) {
+        recommendations.push({
+            icon: 'fas fa-exchange-alt',
+            title: 'Migration Opportunity',
+            text: `Potential annual savings of ${formatCurrency(maxAnnualSavings)} by switching frameworks.`,
+            color: 'primary'
+        });
+    }
+    
+    let roiHtml = '';
+    recommendations.forEach(rec => {
+        roiHtml += `
+            <div class="col-md-4 mb-3">
+                <div class="card border-${rec.color}">
+                    <div class="card-body text-center">
+                        <i class="${rec.icon} fa-2x text-${rec.color} mb-3"></i>
+                        <h6 class="card-title">${rec.title}</h6>
+                        <p class="card-text small">${rec.text}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    document.getElementById('roiAnalysis').innerHTML = roiHtml;
+}
+
+function createScenarioCharts(data) {
+    // Destroy existing charts
+    if (monthlyCostChart) monthlyCostChart.destroy();
+    if (savingsChart) savingsChart.destroy();
+    
+    const frameworks = Object.entries(data).sort((a, b) => a[1].total_cost - b[1].total_cost);
+    const bestCost = frameworks[0][1].total_cost;
+    
+    // Monthly Cost Chart
+    const ctx1 = document.getElementById('monthlyCostChart').getContext('2d');
+    monthlyCostChart = new Chart(ctx1, {
+        type: 'bar',
+        data: {
+            labels: frameworks.map(([key, fw]) => fw.framework_name),
+            datasets: [{
+                label: 'Monthly Cost ($)',
+                data: frameworks.map(([key, fw]) => fw.total_cost),
+                backgroundColor: frameworks.map((fw, index) => 
+                    index === 0 ? '#28a745' : '#6c757d'
+                ),
+                borderColor: frameworks.map((fw, index) => 
+                    index === 0 ? '#1e7e34' : '#495057'
+                ),
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value.toFixed(0);
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // Savings Chart
+    const ctx2 = document.getElementById('savingsChart').getContext('2d');
+    savingsChart = new Chart(ctx2, {
+        type: 'line',
+        data: {
+            labels: frameworks.map(([key, fw]) => fw.framework_name),
+            datasets: [{
+                label: 'Annual Savings vs Best ($)',
+                data: frameworks.map(([key, fw]) => (fw.total_cost - bestCost) * 12),
+                backgroundColor: 'rgba(220, 53, 69, 0.1)',
+                borderColor: '#dc3545',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value.toFixed(0);
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Load startup scenario by default
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        loadScenario('startup');
+    }, 500);
+});
+</script>
+{% endblock %}

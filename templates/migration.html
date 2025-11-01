@@ -1,0 +1,501 @@
+{% extends "base.html" %}
+
+{% block title %}Migration Calculator - AI Framework Cost Calculator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="display-5 fw-bold text-dark mb-4">
+            <i class="fas fa-exchange-alt me-3"></i>
+            Framework Migration Calculator
+        </h1>
+        <p class="lead text-muted mb-5">
+            Calculate potential savings and ROI from migrating between AI agent frameworks.
+            Get detailed cost analysis and migration recommendations.
+        </p>
+    </div>
+</div>
+
+<!-- Migration Form -->
+<div class="row">
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-cogs me-2"></i>
+                    Migration Configuration
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="migrationForm">
+                    <div class="mb-3">
+                        <label for="currentFramework" class="form-label">
+                            <i class="fas fa-arrow-circle-left me-1"></i>
+                            Current Framework
+                        </label>
+                        <select class="form-select" id="currentFramework" required>
+                            <option value="">Select current framework...</option>
+                            <option value="autogen">AutoGen</option>
+                            <option value="crewai">CrewAI</option>
+                            <option value="langchain">LangChain</option>
+                            <option value="langgraph">LangGraph</option>
+                            <option value="semantic_kernel">Semantic Kernel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="targetFramework" class="form-label">
+                            <i class="fas fa-arrow-circle-right me-1"></i>
+                            Target Framework
+                        </label>
+                        <select class="form-select" id="targetFramework" required>
+                            <option value="">Select target framework...</option>
+                            <option value="autogen">AutoGen</option>
+                            <option value="crewai">CrewAI</option>
+                            <option value="langchain">LangChain</option>
+                            <option value="langgraph">LangGraph</option>
+                            <option value="semantic_kernel">Semantic Kernel</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="migrationModel" class="form-label">
+                            <i class="fas fa-brain me-1"></i>
+                            AI Model
+                        </label>
+                        <select class="form-select" id="migrationModel" required>
+                            <option value="openai_gpt4o">OpenAI GPT-4o</option>
+                            <option value="openai_gpt4o_mini">OpenAI GPT-4o Mini</option>
+                            <option value="claude_35_sonnet">Claude 3.5 Sonnet</option>
+                            <option value="local_llm">Local LLM</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="migrationRequests" class="form-label">
+                            <i class="fas fa-chart-bar me-1"></i>
+                            Monthly Requests
+                        </label>
+                        <input type="number" class="form-control" id="migrationRequests" value="10000" min="1" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-calculator me-2"></i>
+                        Calculate Migration Impact
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Migration Scenarios -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-lightning-bolt me-2"></i>
+                    Quick Migration Scenarios
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="text-muted mb-3">Click to load common migration scenarios:</p>
+                
+                <div class="d-grid gap-2">
+                    <button class="btn btn-outline-info" onclick="loadMigrationScenario('langchain', 'autogen')">
+                        LangChain → AutoGen
+                        <span class="badge bg-success ms-2">Popular</span>
+                    </button>
+                    
+                    <button class="btn btn-outline-info" onclick="loadMigrationScenario('crewai', 'semantic_kernel')">
+                        CrewAI → Semantic Kernel
+                        <span class="badge bg-warning ms-2">Enterprise</span>
+                    </button>
+                    
+                    <button class="btn btn-outline-info" onclick="loadMigrationScenario('langgraph', 'autogen')">
+                        LangGraph → AutoGen
+                        <span class="badge bg-info ms-2">Performance</span>
+                    </button>
+                    
+                    <button class="btn btn-outline-info" onclick="loadMigrationScenario('langchain', 'semantic_kernel')">
+                        LangChain → Semantic Kernel
+                        <span class="badge bg-primary ms-2">Cost-Effective</span>
+                    </button>
+                </div>
+                
+                <div class="mt-4 p-3 bg-light rounded">
+                    <h6 class="fw-bold">💡 Migration Tips</h6>
+                    <ul class="small mb-0">
+                        <li>Consider token efficiency differences</li>
+                        <li>Evaluate framework-specific features</li>
+                        <li>Factor in development time costs</li>
+                        <li>Test with your actual workload</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Migration Results -->
+<div class="row" id="migrationResults" style="display: none;">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-pie me-2"></i>
+                    Migration Analysis Results
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="migrationSummary"></div>
+                
+                <!-- ROI Timeline -->
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">Cost Savings Timeline</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="savingsTimelineChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">Framework Comparison</h6>
+                            </div>
+                            <div class="card-body">
+                                <canvas id="frameworkCompChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Migration Checklist -->
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-tasks me-2"></i>
+                                    Migration Checklist & Recommendations
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="migrationChecklist"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let savingsTimelineChart = null;
+let frameworkCompChart = null;
+
+function loadMigrationScenario(from, to) {
+    document.getElementById('currentFramework').value = from;
+    document.getElementById('targetFramework').value = to;
+    document.getElementById('migrationModel').value = 'openai_gpt4o';
+    document.getElementById('migrationRequests').value = '25000';
+    
+    // Auto-calculate
+    setTimeout(() => {
+        document.getElementById('migrationForm').dispatchEvent(new Event('submit'));
+    }, 100);
+}
+
+document.getElementById('migrationForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.querySelector('#migrationForm button[type="submit"]');
+    showLoading(submitBtn);
+    
+    const fromFramework = document.getElementById('currentFramework').value;
+    const toFramework = document.getElementById('targetFramework').value;
+    
+    if (fromFramework === toFramework) {
+        showError('Please select different frameworks for migration analysis');
+        hideLoading(submitBtn, '<i class="fas fa-calculator me-2"></i>Calculate Migration Impact');
+        return;
+    }
+    
+    const formData = {
+        from_framework: fromFramework,
+        to_framework: toFramework,
+        model: document.getElementById('migrationModel').value,
+        requests_per_month: parseInt(document.getElementById('migrationRequests').value)
+    };
+    
+    try {
+        const response = await fetch('/api/migration', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            displayMigrationResults(result.data, formData);
+            createMigrationCharts(result.data, formData);
+            document.getElementById('migrationResults').style.display = 'block';
+            showSuccess('Migration analysis completed!');
+        } else {
+            showError('Error: ' + result.error);
+        }
+    } catch (error) {
+        showError('Network error: ' + error.message);
+    } finally {
+        hideLoading(submitBtn, '<i class="fas fa-calculator me-2"></i>Calculate Migration Impact');
+    }
+});
+
+function displayMigrationResults(data, params) {
+    const fromName = params.from_framework.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const toName = params.to_framework.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const isSaving = data.monthly_savings > 0;
+    
+    let summaryHtml = `
+        <div class="row">
+            <div class="col-md-8">
+                <h4 class="fw-bold mb-3">
+                    ${fromName} → ${toName}
+                    ${isSaving ? 
+                        `<span class="badge bg-success ms-2"><i class="fas fa-arrow-down me-1"></i>Savings</span>` : 
+                        `<span class="badge bg-warning ms-2"><i class="fas fa-arrow-up me-1"></i>Increase</span>`
+                    }
+                </h4>
+                
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <tr>
+                            <td class="fw-bold">Current Monthly Cost:</td>
+                            <td class="text-end">${formatCurrency(data.current_monthly_cost)}</td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">New Monthly Cost:</td>
+                            <td class="text-end">${formatCurrency(data.new_monthly_cost)}</td>
+                        </tr>
+                        <tr class="border-top">
+                            <td class="fw-bold">Monthly Impact:</td>
+                            <td class="text-end fw-bold ${isSaving ? 'text-success' : 'text-danger'}">
+                                ${isSaving ? '-' : '+'}${formatCurrency(Math.abs(data.monthly_savings))}
+                                (${Math.abs(data.savings_percentage)}%)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">Annual Impact:</td>
+                            <td class="text-end fw-bold ${isSaving ? 'text-success' : 'text-danger'}">
+                                ${isSaving ? '-' : '+'}${formatCurrency(Math.abs(data.annual_savings))}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="metric-card ${isSaving ? 'border-success' : 'border-warning'}">
+                        <div class="metric-value ${isSaving ? 'text-success' : 'text-warning'}">
+                            ${isSaving ? data.savings_percentage : Math.abs(data.savings_percentage)}%
+                        </div>
+                        <div class="metric-label">
+                            ${isSaving ? 'Cost Reduction' : 'Cost Increase'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('migrationSummary').innerHTML = summaryHtml;
+    
+    // Generate migration checklist
+    generateMigrationChecklist(params, data, isSaving);
+}
+
+function generateMigrationChecklist(params, data, isSaving) {
+    const fromName = params.from_framework.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    const toName = params.to_framework.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    
+    let checklist = [];
+    
+    // Financial considerations
+    if (isSaving && Math.abs(data.annual_savings) > 5000) {
+        checklist.push({
+            category: 'Financial Impact',
+            icon: 'fas fa-dollar-sign',
+            color: 'success',
+            items: [
+                `Potential annual savings of ${formatCurrency(Math.abs(data.annual_savings))}`,
+                `${data.savings_percentage}% cost reduction`,
+                'Justifies migration investment'
+            ]
+        });
+    } else if (!isSaving) {
+        checklist.push({
+            category: 'Financial Impact',
+            icon: 'fas fa-exclamation-triangle',
+            color: 'warning',
+            items: [
+                `Annual cost increase of ${formatCurrency(Math.abs(data.annual_savings))}`,
+                'Consider if features justify additional cost',
+                'Look for optimization opportunities'
+            ]
+        });
+    }
+    
+    // Technical considerations
+    checklist.push({
+        category: 'Technical Migration',
+        icon: 'fas fa-code',
+        color: 'info',
+        items: [
+            `Review ${toName} documentation and APIs`,
+            'Assess code refactoring requirements',
+            'Plan testing and validation strategy',
+            'Consider gradual migration approach'
+        ]
+    });
+    
+    // Framework-specific recommendations
+    if (params.to_framework === 'semantic_kernel') {
+        checklist.push({
+            category: 'Semantic Kernel Benefits',
+            icon: 'fas fa-enterprise',
+            color: 'primary',
+            items: [
+                'Strong enterprise integration capabilities',
+                'Native Microsoft ecosystem support',
+                'Excellent token efficiency',
+                'Built-in security features'
+            ]
+        });
+    } else if (params.to_framework === 'autogen') {
+        checklist.push({
+            category: 'AutoGen Benefits',
+            icon: 'fas fa-users',
+            color: 'primary',
+            items: [
+                'Advanced multi-agent conversations',
+                'Research-grade capabilities',
+                'Flexible agent orchestration',
+                'Strong community support'
+            ]
+        });
+    }
+    
+    let checklistHtml = '<div class="row">';
+    checklist.forEach((section, index) => {
+        checklistHtml += `
+            <div class="col-md-4 mb-3">
+                <div class="card border-${section.color}">
+                    <div class="card-header bg-${section.color} text-white">
+                        <h6 class="mb-0">
+                            <i class="${section.icon} me-2"></i>
+                            ${section.category}
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-unstyled mb-0">
+        `;
+        
+        section.items.forEach(item => {
+            checklistHtml += `<li class="mb-2"><i class="fas fa-check text-${section.color} me-2"></i>${item}</li>`;
+        });
+        
+        checklistHtml += `
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    checklistHtml += '</div>';
+    
+    document.getElementById('migrationChecklist').innerHTML = checklistHtml;
+}
+
+function createMigrationCharts(data, params) {
+    // Destroy existing charts
+    if (savingsTimelineChart) savingsTimelineChart.destroy();
+    if (frameworkCompChart) frameworkCompChart.destroy();
+    
+    // Savings Timeline Chart
+    const months = ['Month 1', 'Month 6', 'Month 12', 'Month 18', 'Month 24'];
+    const cumulativeSavings = months.map((_, index) => data.monthly_savings * (index + 1));
+    
+    const ctx1 = document.getElementById('savingsTimelineChart').getContext('2d');
+    savingsTimelineChart = new Chart(ctx1, {
+        type: 'line',
+        data: {
+            labels: months,
+            datasets: [{
+                label: 'Cumulative Savings ($)',
+                data: cumulativeSavings,
+                backgroundColor: data.monthly_savings > 0 ? 'rgba(40, 167, 69, 0.1)' : 'rgba(220, 53, 69, 0.1)',
+                borderColor: data.monthly_savings > 0 ? '#28a745' : '#dc3545',
+                borderWidth: 3,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value.toFixed(0);
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    // Framework Comparison Chart
+    const ctx2 = document.getElementById('frameworkCompChart').getContext('2d');
+    frameworkCompChart = new Chart(ctx2, {
+        type: 'doughnut',
+        data: {
+            labels: ['Current Framework', 'Target Framework'],
+            datasets: [{
+                data: [data.current_monthly_cost, data.new_monthly_cost],
+                backgroundColor: ['#6c757d', '#007bff'],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+}
+
+// Load default scenario
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        loadMigrationScenario('langchain', 'autogen');
+    }, 500);
+});
+</script>
+{% endblock %}

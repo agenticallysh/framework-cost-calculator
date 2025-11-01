@@ -1,0 +1,385 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AI Framework Cost Calculator{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="hero-section text-center mb-5">
+            <h1 class="display-4 fw-bold text-dark mb-3">
+                <i class="fas fa-robot me-3"></i>
+                AI Framework Cost Calculator
+            </h1>
+            <p class="lead text-muted mb-4">
+                Compare real-time costs across AutoGen, CrewAI, LangChain, LangGraph, and Semantic Kernel frameworks.
+                Make data-driven decisions with accurate 2025 pricing data.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Input Form -->
+    <div class="col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-primary text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-sliders-h me-2"></i>
+                    Configuration
+                </h5>
+            </div>
+            <div class="card-body">
+                <form id="costForm">
+                    <div class="mb-3">
+                        <label for="model" class="form-label">
+                            <i class="fas fa-brain me-1"></i>
+                            AI Model
+                        </label>
+                        <select class="form-select" id="model" required>
+                            <option value="">Select Model...</option>
+                            <option value="openai_gpt4o">OpenAI GPT-4o ($5/$20 per 1M tokens)</option>
+                            <option value="openai_gpt4o_mini">OpenAI GPT-4o Mini ($0.15/$0.60 per 1M tokens)</option>
+                            <option value="claude_35_sonnet">Claude 3.5 Sonnet ($3/$15 per 1M tokens)</option>
+                            <option value="local_llm">Local LLM ($0.05/$0.05 per 1M tokens)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="requests" class="form-label">
+                            <i class="fas fa-chart-bar me-1"></i>
+                            Requests per Month
+                        </label>
+                        <input type="number" class="form-control" id="requests" value="10000" min="1" required>
+                        <div class="form-text">Enter your expected monthly API requests</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="customTokens" class="form-label">
+                            <i class="fas fa-cogs me-1"></i>
+                            Custom Tokens per Request (Optional)
+                        </label>
+                        <input type="number" class="form-control" id="customTokens" placeholder="Leave empty to use framework defaults">
+                        <div class="form-text">Override default token usage estimates</div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-calculator me-2"></i>
+                        Compare All Frameworks
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Results Summary -->
+    <div class="col-lg-8 mb-4">
+        <div class="card h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-trophy me-2"></i>
+                    Framework Comparison Results
+                </h5>
+            </div>
+            <div class="card-body">
+                <div id="resultsContent">
+                    <div class="text-center text-muted py-5">
+                        <i class="fas fa-chart-pie fa-3x mb-3"></i>
+                        <h5>Configure settings and click "Compare All Frameworks" to see results</h5>
+                        <p>Real-time cost analysis across all major AI agent frameworks</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cost Breakdown Charts -->
+<div class="row" id="chartsSection" style="display: none;">
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-doughnut me-2"></i>
+                    Cost Distribution
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="costDistributionChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-chart-bar me-2"></i>
+                    Framework Comparison
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="frameworkComparisonChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+                    <i class="fas fa-rocket me-2"></i>
+                    Quick Actions
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <a href="/scenarios" class="btn btn-outline-primary w-100">
+                            <i class="fas fa-chart-line me-2"></i>
+                            View Cost Scenarios
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="/migration" class="btn btn-outline-success w-100">
+                            <i class="fas fa-exchange-alt me-2"></i>
+                            Migration Calculator
+                        </a>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <a href="/api" class="btn btn-outline-info w-100">
+                            <i class="fas fa-code me-2"></i>
+                            API Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+let costDistributionChart = null;
+let frameworkComparisonChart = null;
+
+document.getElementById('costForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const submitBtn = document.querySelector('button[type="submit"]');
+    showLoading(submitBtn);
+    
+    const formData = {
+        model: document.getElementById('model').value,
+        requests_per_month: document.getElementById('requests').value,
+        custom_tokens: document.getElementById('customTokens').value || null
+    };
+    
+    try {
+        const response = await fetch('/api/compare', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+            displayResults(result.data);
+            createCharts(result.data);
+            document.getElementById('chartsSection').style.display = 'block';
+            showSuccess('Cost comparison completed successfully!');
+        } else {
+            showError('Error: ' + result.error);
+        }
+    } catch (error) {
+        showError('Network error: ' + error.message);
+    } finally {
+        hideLoading(submitBtn, '<i class="fas fa-calculator me-2"></i>Compare All Frameworks');
+    }
+});
+
+function displayResults(data) {
+    const resultsContent = document.getElementById('resultsContent');
+    
+    // Sort frameworks by total cost
+    const frameworks = Object.entries(data).sort((a, b) => a[1].total_cost - b[1].total_cost);
+    
+    let html = `
+        <div class="table-responsive">
+            <table class="table table-striped comparison-table">
+                <thead>
+                    <tr>
+                        <th>Rank</th>
+                        <th>Framework</th>
+                        <th>Total Cost/Month</th>
+                        <th>API Cost</th>
+                        <th>Infrastructure</th>
+                        <th>Monitoring</th>
+                        <th>Cost/Request</th>
+                    </tr>
+                </thead>
+                <tbody>
+    `;
+    
+    frameworks.forEach(([key, framework], index) => {
+        const isWinner = index === 0;
+        const rowClass = isWinner ? 'best-value' : '';
+        const rankIcon = index === 0 ? '<i class="fas fa-crown text-warning me-1"></i>' : `${index + 1}.`;
+        
+        html += `
+            <tr class="${rowClass}">
+                <td class="fw-bold">${rankIcon}</td>
+                <td>
+                    <strong>${framework.framework_name}</strong>
+                    <br><small class="text-muted">${framework.description}</small>
+                </td>
+                <td class="fw-bold">${formatCurrency(framework.total_cost)}</td>
+                <td>${formatCurrency(framework.api_cost)}</td>
+                <td>${formatCurrency(framework.infrastructure_cost)}</td>
+                <td>${formatCurrency(framework.monitoring_cost)}</td>
+                <td>${formatCurrency(framework.cost_per_request)}</td>
+            </tr>
+        `;
+    });
+    
+    html += `
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="row mt-4">
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <div class="metric-value">${frameworks.length}</div>
+                    <div class="metric-label">Frameworks Compared</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <div class="metric-value">${formatCurrency(frameworks[0][1].total_cost)}</div>
+                    <div class="metric-label">Best Monthly Cost</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <div class="metric-value">${formatCurrency(frameworks[frameworks.length - 1][1].total_cost - frameworks[0][1].total_cost)}</div>
+                    <div class="metric-label">Max Savings Available</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card metric-card">
+                    <div class="metric-value">${Math.round(((frameworks[frameworks.length - 1][1].total_cost - frameworks[0][1].total_cost) / frameworks[frameworks.length - 1][1].total_cost) * 100)}%</div>
+                    <div class="metric-label">Potential Savings</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    resultsContent.innerHTML = html;
+    resultsContent.classList.add('fade-in');
+}
+
+function createCharts(data) {
+    // Destroy existing charts
+    if (costDistributionChart) costDistributionChart.destroy();
+    if (frameworkComparisonChart) frameworkComparisonChart.destroy();
+    
+    const frameworks = Object.entries(data);
+    const bestFramework = frameworks.reduce((min, current) => 
+        current[1].total_cost < min[1].total_cost ? current : min
+    );
+    
+    // Cost Distribution Chart (Pie chart for best framework)
+    const ctx1 = document.getElementById('costDistributionChart').getContext('2d');
+    costDistributionChart = new Chart(ctx1, {
+        type: 'doughnut',
+        data: {
+            labels: ['API Costs', 'Infrastructure', 'Monitoring'],
+            datasets: [{
+                data: [
+                    bestFramework[1].api_cost,
+                    bestFramework[1].infrastructure_cost,
+                    bestFramework[1].monitoring_cost
+                ],
+                backgroundColor: [
+                    '#3498db',
+                    '#2ecc71',
+                    '#f39c12'
+                ],
+                borderWidth: 2,
+                borderColor: '#fff'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title: {
+                    display: true,
+                    text: `${bestFramework[1].framework_name} (Best Option)`
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Framework Comparison Chart (Bar chart)
+    const ctx2 = document.getElementById('frameworkComparisonChart').getContext('2d');
+    frameworkComparisonChart = new Chart(ctx2, {
+        type: 'bar',
+        data: {
+            labels: frameworks.map(([key, fw]) => fw.framework_name),
+            datasets: [{
+                label: 'Total Monthly Cost ($)',
+                data: frameworks.map(([key, fw]) => fw.total_cost),
+                backgroundColor: frameworks.map((fw, index) => 
+                    index === 0 ? '#27ae60' : '#3498db'
+                ),
+                borderColor: frameworks.map((fw, index) => 
+                    index === 0 ? '#229954' : '#2980b9'
+                ),
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value.toFixed(2);
+                        }
+                    }
+                }
+            }
+        }
+    });
+}
+
+// Initialize with default comparison on page load
+window.addEventListener('load', function() {
+    // Set default model
+    document.getElementById('model').value = 'openai_gpt4o';
+    
+    // Auto-trigger comparison with defaults
+    setTimeout(() => {
+        document.getElementById('costForm').dispatchEvent(new Event('submit'));
+    }, 500);
+});
+</script>
+{% endblock %}

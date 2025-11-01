@@ -1,0 +1,263 @@
+{
+  "migration_summary": {
+    "from_framework": "langchain",
+    "to_framework": "semantic_kernel",
+    "model": "openai_gpt4o",
+    "requests_per_month": 25000,
+    "analysis_period_months": 36
+  },
+  "cost_analysis": {
+    "current_monthly_cost": 1327.07,
+    "target_monthly_cost": 1034.8,
+    "monthly_savings": 292.27,
+    "annual_savings": 3507.24,
+    "development_cost": 42350.0,
+    "risk_factor": 1.1
+  },
+  "roi_metrics": {
+    "payback_period_months": 144.9002634550245,
+    "roi_percentage": -75.15532467532468,
+    "npv": -33235.13,
+    "break_even_month": 145,
+    "total_3_year_savings": 10521.72
+  },
+  "cash_flow_projection": [
+    {
+      "month": 0,
+      "description": "Initial Development Investment",
+      "cash_flow": -42350.0,
+      "cumulative_cash_flow": -42350.0
+    },
+    {
+      "month": 1,
+      "description": "Operational Savings Month 1",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -42057.73
+    },
+    {
+      "month": 2,
+      "description": "Operational Savings Month 2",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -41765.46000000001
+    },
+    {
+      "month": 3,
+      "description": "Operational Savings Month 3",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -41473.19000000001
+    },
+    {
+      "month": 4,
+      "description": "Operational Savings Month 4",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -41180.92000000001
+    },
+    {
+      "month": 5,
+      "description": "Operational Savings Month 5",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -40888.650000000016
+    },
+    {
+      "month": 6,
+      "description": "Operational Savings Month 6",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -40596.38000000002
+    },
+    {
+      "month": 7,
+      "description": "Operational Savings Month 7",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -40304.11000000002
+    },
+    {
+      "month": 8,
+      "description": "Operational Savings Month 8",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -40011.840000000026
+    },
+    {
+      "month": 9,
+      "description": "Operational Savings Month 9",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -39719.57000000003
+    },
+    {
+      "month": 10,
+      "description": "Operational Savings Month 10",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -39427.30000000003
+    },
+    {
+      "month": 11,
+      "description": "Operational Savings Month 11",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -39135.030000000035
+    },
+    {
+      "month": 12,
+      "description": "Operational Savings Month 12",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -38842.76000000004
+    },
+    {
+      "month": 13,
+      "description": "Operational Savings Month 13",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -38550.49000000004
+    },
+    {
+      "month": 14,
+      "description": "Operational Savings Month 14",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -38258.220000000045
+    },
+    {
+      "month": 15,
+      "description": "Operational Savings Month 15",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -37965.95000000005
+    },
+    {
+      "month": 16,
+      "description": "Operational Savings Month 16",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -37673.68000000005
+    },
+    {
+      "month": 17,
+      "description": "Operational Savings Month 17",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -37381.410000000054
+    },
+    {
+      "month": 18,
+      "description": "Operational Savings Month 18",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -37089.14000000006
+    },
+    {
+      "month": 19,
+      "description": "Operational Savings Month 19",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -36796.87000000006
+    },
+    {
+      "month": 20,
+      "description": "Operational Savings Month 20",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -36504.600000000064
+    },
+    {
+      "month": 21,
+      "description": "Operational Savings Month 21",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -36212.33000000007
+    },
+    {
+      "month": 22,
+      "description": "Operational Savings Month 22",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -35920.06000000007
+    },
+    {
+      "month": 23,
+      "description": "Operational Savings Month 23",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -35627.79000000007
+    },
+    {
+      "month": 24,
+      "description": "Operational Savings Month 24",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -35335.52000000008
+    },
+    {
+      "month": 25,
+      "description": "Operational Savings Month 25",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -35043.25000000008
+    },
+    {
+      "month": 26,
+      "description": "Operational Savings Month 26",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -34750.98000000008
+    },
+    {
+      "month": 27,
+      "description": "Operational Savings Month 27",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -34458.71000000009
+    },
+    {
+      "month": 28,
+      "description": "Operational Savings Month 28",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -34166.44000000009
+    },
+    {
+      "month": 29,
+      "description": "Operational Savings Month 29",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -33874.17000000009
+    },
+    {
+      "month": 30,
+      "description": "Operational Savings Month 30",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -33581.900000000096
+    },
+    {
+      "month": 31,
+      "description": "Operational Savings Month 31",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -33289.6300000001
+    },
+    {
+      "month": 32,
+      "description": "Operational Savings Month 32",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -32997.3600000001
+    },
+    {
+      "month": 33,
+      "description": "Operational Savings Month 33",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -32705.090000000102
+    },
+    {
+      "month": 34,
+      "description": "Operational Savings Month 34",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -32412.8200000001
+    },
+    {
+      "month": 35,
+      "description": "Operational Savings Month 35",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -32120.5500000001
+    },
+    {
+      "month": 36,
+      "description": "Operational Savings Month 36",
+      "cash_flow": 292.27,
+      "cumulative_cash_flow": -31828.2800000001
+    }
+  ],
+  "recommendations": [
+    {
+      "category": "Long Payback",
+      "level": "cautionary",
+      "message": "Long payback period of 144.9 months",
+      "action": "Evaluate strategic benefits beyond cost savings"
+    },
+    {
+      "category": "Negative Value",
+      "level": "cautionary",
+      "message": "Negative NPV of $-33,235",
+      "action": "Migration not recommended based on financial analysis"
+    }
+  ],
+  "generated_at": "2025-11-01T12:01:56.517676"
+}

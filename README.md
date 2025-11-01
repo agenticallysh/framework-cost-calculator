@@ -1,10 +1,12 @@
-# AI Agent Cost Calculator
+# 🧮 AI Framework Cost Calculator
 
-💰 Calculate real costs for AI agent deployments. Compare infrastructure, token usage, and hidden costs across 40+ frameworks.
+> **Real-time cost analysis and ROI calculator for AI agent frameworks**  
+> Compare AutoGen, CrewAI, LangChain, LangGraph, and Semantic Kernel with accurate 2025 pricing data.
 
-[![Frameworks](https://img.shields.io/badge/Frameworks-40+-blue.svg)](https://www.agentically.sh/ai-agentic-frameworks/cost-calculator/)
-[![Accuracy](https://img.shields.io/badge/Accuracy-96%25-green.svg)](https://www.agentically.sh/ai-agentic-frameworks/cost-calculator/accuracy/)
-[![Updated](https://img.shields.io/badge/Updated-Daily-orange.svg)](https://github.com/agenticallysh/framework-cost-calculator)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
+![Flask](https://img.shields.io/badge/flask-2.3+-green.svg)
+![Status](https://img.shields.io/badge/status-production%20ready-brightgreen.svg)
 
 ## 🎯 Quick Cost Estimation
 
